@@ -1,0 +1,77 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.Sample", "SinkSharp.Sample\SinkSharp.Sample.csproj", "{11111111-AAAA-AAAA-AAAA-111111111111}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.WebApiSample", "SinkSharp.WebApiSample\SinkSharp.WebApiSample.csproj", "{22222222-AAAA-AAAA-AAAA-222222222222}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.WorkerSample", "SinkSharp.WorkerSample\SinkSharp.WorkerSample.csproj", "{33333333-AAAA-AAAA-AAAA-333333333333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.AzureSample", "SinkSharp.AzureSample\SinkSharp.AzureSample.csproj", "{44444444-AAAA-AAAA-AAAA-444444444444}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.MinimalApiSample", "SinkSharp.MinimalApiSample\SinkSharp.MinimalApiSample.csproj", "{55555555-AAAA-AAAA-AAAA-555555555555}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.CustomSinkSample", "SinkSharp.CustomSinkSample\SinkSharp.CustomSinkSample.csproj", "{66666666-BBBB-BBBB-BBBB-666666666666}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.CustomEnricherSample", "SinkSharp.CustomEnricherSample\SinkSharp.CustomEnricherSample.csproj", "{77777777-BBBB-BBBB-BBBB-777777777777}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.MultiSinkSample", "SinkSharp.MultiSinkSample\SinkSharp.MultiSinkSample.csproj", "{88888888-BBBB-BBBB-BBBB-888888888888}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.HealthCheckSample", "SinkSharp.HealthCheckSample\SinkSharp.HealthCheckSample.csproj", "{99999999-BBBB-BBBB-BBBB-999999999999}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.ScopedLoggingSample", "SinkSharp.ScopedLoggingSample\SinkSharp.ScopedLoggingSample.csproj", "{AAAAAAAA-CCCC-CCCC-CCCC-AAAAAAAAAAAA}"
+EndProject
+
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11111111-AAAA-AAAA-AAAA-111111111111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11111111-AAAA-AAAA-AAAA-111111111111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11111111-AAAA-AAAA-AAAA-111111111111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11111111-AAAA-AAAA-AAAA-111111111111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22222222-AAAA-AAAA-AAAA-222222222222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22222222-AAAA-AAAA-AAAA-222222222222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22222222-AAAA-AAAA-AAAA-222222222222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22222222-AAAA-AAAA-AAAA-222222222222}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33333333-AAAA-AAAA-AAAA-333333333333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33333333-AAAA-AAAA-AAAA-333333333333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33333333-AAAA-AAAA-AAAA-333333333333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33333333-AAAA-AAAA-AAAA-333333333333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44444444-AAAA-AAAA-AAAA-444444444444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44444444-AAAA-AAAA-AAAA-444444444444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44444444-AAAA-AAAA-AAAA-444444444444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44444444-AAAA-AAAA-AAAA-444444444444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55555555-AAAA-AAAA-AAAA-555555555555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55555555-AAAA-AAAA-AAAA-555555555555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55555555-AAAA-AAAA-AAAA-555555555555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55555555-AAAA-AAAA-AAAA-555555555555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66666666-BBBB-BBBB-BBBB-666666666666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66666666-BBBB-BBBB-BBBB-666666666666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66666666-BBBB-BBBB-BBBB-666666666666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66666666-BBBB-BBBB-BBBB-666666666666}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77777777-BBBB-BBBB-BBBB-777777777777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77777777-BBBB-BBBB-BBBB-777777777777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77777777-BBBB-BBBB-BBBB-777777777777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77777777-BBBB-BBBB-BBBB-777777777777}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88888888-BBBB-BBBB-BBBB-888888888888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88888888-BBBB-BBBB-BBBB-888888888888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88888888-BBBB-BBBB-BBBB-888888888888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88888888-BBBB-BBBB-BBBB-888888888888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99999999-BBBB-BBBB-BBBB-999999999999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99999999-BBBB-BBBB-BBBB-999999999999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99999999-BBBB-BBBB-BBBB-999999999999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99999999-BBBB-BBBB-BBBB-999999999999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAAAAAAA-CCCC-CCCC-CCCC-AAAAAAAAAAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAAAAAAA-CCCC-CCCC-CCCC-AAAAAAAAAAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAAAAAAA-CCCC-CCCC-CCCC-AAAAAAAAAAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAAAAAAA-CCCC-CCCC-CCCC-AAAAAAAAAAAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

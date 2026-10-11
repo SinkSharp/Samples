@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "SinkSharp.AzureSample": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "WEBSITE_SITE_NAME": "sinksharp-api",
+        "REGION_NAME": "East US",
+        "WEBSITE_SLOT_NAME": "staging",
+        "WEBSITE_RESOURCE_GROUP": "sinksharp-rg",
+        "POD_NAME": "sinksharp-api-6d4b9f-xk2pq",
+        "POD_NAMESPACE": "production"
+      },
+      "applicationUrl": "https://localhost:64841;http://localhost:64842"
+    }
+  }
+}

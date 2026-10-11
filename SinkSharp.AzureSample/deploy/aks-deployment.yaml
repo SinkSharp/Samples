@@ -1,0 +1,129 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# AKS Deployment — SinkSharp with Azure context enricher
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# When you have 10 pods running, every log event in the dashboard will show:
+#   K8sPodName:   order-api-6d4b9f-xk2pq   ← which exact pod logged it
+#   K8sNamespace: production                 ← which namespace
+#   AzureRegion:  East US                    ← which region
+#
+# Without this, all 10 pods look identical in logs — impossible to debug.
+# With this, you can filter the dashboard by pod name instantly.
+#
+# kubectl apply -f aks-deployment.yaml
+# ═══════════════════════════════════════════════════════════════════════════════
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-api
+  namespace: production
+  labels:
+    app: order-api
+spec:
+  replicas: 3                    # ← 3 pods, each logs with its own pod name
+  selector:
+    matchLabels:
+      app: order-api
+  template:
+    metadata:
+      labels:
+        app: order-api
+    spec:
+      containers:
+        - name: order-api
+          image: yourregistry.azurecr.io/order-api:1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            # ── SinkSharp Azure context ──────────────────────────────────────
+            # These two are critical for multi-pod debugging.
+            # Kubernetes fills them automatically from pod metadata — no hardcoding.
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name          # e.g. order-api-6d4b9f-xk2pq
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace     # e.g. production
+
+            # ── App config ───────────────────────────────────────────────────
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Production
+            - name: ASPNETCORE_URLS
+              value: http://+:8080
+
+            # ── Optional: simulate App Service vars on AKS ───────────────────
+            # AKS does not set these automatically — add manually if you want
+            # region / resource group in your logs.
+            - name: REGION_NAME
+              value: "East US"                      # your AKS cluster region
+            - name: WEBSITE_RESOURCE_GROUP
+              value: "order-api-rg"                 # your resource group
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+
+          readinessProbe:
+            httpGet:
+              path: /health                         # SinkSharpWithHealth endpoint
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-api
+  namespace: production
+spec:
+  selector:
+    app: order-api
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: ClusterIP
+
+---
+# ── Dashboard access from outside the cluster ─────────────────────────────────
+# The SinkSharp dashboard runs at /sinksharp/dashboard on the same pod.
+# Access it via port-forward during debugging:
+#
+#   kubectl port-forward pod/order-api-6d4b9f-xk2pq 8080:8080 -n production
+#   Open: http://localhost:8080/sinksharp/dashboard
+#
+# Or expose via Ingress (only for internal/corp network — not public):
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: order-api-ingress
+  namespace: production
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  rules:
+    - host: order-api.internal.yourcompany.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: order-api
+                port:
+                  number: 80

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "SinkSharp.MultiSinkSample": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:51850;http://localhost:51853"
+    }
+  }
+}

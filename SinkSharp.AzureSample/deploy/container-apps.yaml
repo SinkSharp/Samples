@@ -1,0 +1,55 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Azure Container Apps — SinkSharp with Azure context enricher
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Container Apps runs on Kubernetes internally but exposes a simpler surface.
+# Unlike plain AKS, you must set POD_NAME and POD_NAMESPACE manually
+# (Container Apps doesn't auto-inject Downward API fields).
+#
+# az containerapp create \
+#   --name order-api \
+#   --resource-group order-api-rg \
+#   --environment my-env \
+#   --yaml container-apps.yaml
+# ═══════════════════════════════════════════════════════════════════════════════
+
+properties:
+  configuration:
+    ingress:
+      external: true
+      targetPort: 8080
+  template:
+    containers:
+      - name: order-api
+        image: yourregistry.azurecr.io/order-api:1.0.0
+        resources:
+          cpu: 0.5
+          memory: 1Gi
+        env:
+          # ── SinkSharp Azure context ─────────────────────────────────────────
+          # Container Apps doesn't auto-inject pod name like AKS does.
+          # Use the CONTAINER_APP_REPLICA_NAME env var that Container Apps sets:
+          - name: POD_NAME
+            value: $(CONTAINER_APP_REPLICA_NAME)   # set by Container Apps automatically
+          - name: POD_NAMESPACE
+            value: $(CONTAINER_APP_NAME)           # use app name as namespace equivalent
+
+          # These ARE set automatically by Container Apps (via App Service heritage):
+          #   WEBSITE_SITE_NAME      → AzureSiteName
+          #   REGION_NAME            → AzureRegion
+          # These you set manually:
+          - name: WEBSITE_RESOURCE_GROUP
+            value: "order-api-rg"
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Production
+
+    scale:
+      minReplicas: 1
+      maxReplicas: 10
+      rules:
+        - name: http-scale
+          http:
+            metadata:
+              concurrentRequests: "100"
+# When scaled to 10 replicas, each replica logs with its own POD_NAME
+# → filter by K8sPodName in the dashboard to isolate one replica's logs
