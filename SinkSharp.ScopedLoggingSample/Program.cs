@@ -34,7 +34,7 @@ builder.Services.AddSinkSharp(options => options
     .WithEnvironment(builder.Environment.ApplicationName, builder.Environment.EnvironmentName)
     .WithPiiMasking()
     .WithDashboard(out dashSink)
-    .WriteTo(new ColoredConsoleSink())
+    .WriteTo(new ColoredConsoleSink(showFullCategory: true))
     .WriteTo(new RollingFileSink("logs", "scoped-sample")));
 
 builder.Services.AddSinkSharpDashboard(dashSink);

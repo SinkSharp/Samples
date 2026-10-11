@@ -11,7 +11,7 @@ Complete working samples covering every use case. Each sample is self-contained 
 | **SinkSharp.WorkerSample** | Worker Service — 2 background workers + dashboard | `dotnet run` → http://localhost:5341 |
 | **SinkSharp.MinimalApiSample** | Minimal API — per-category levels, PII, health check | `dotnet run` → https://localhost:5001/sinksharp/dashboard |
 | **SinkSharp.CustomSinkSample** | 4 custom sink patterns: InMemory, Alert, Conditional, Buffered | `dotnet run` |
-| **SinkSharp.CustomEnricherSample** | 3 custom enrichers: Tenant, BuildInfo, Request | `dotnet run` → https://localhost:5001 |
+| **SinkSharp.CustomEnricherSample** | 3 custom enrichers: Tenant, BuildInfo, Request + dashboard | `dotnet run` → https://localhost:5001/sinksharp/dashboard |
 | **SinkSharp.MultiSinkSample** | Console + File + Dashboard + AuditFile simultaneously | `dotnet run` → https://localhost:5001/sinksharp/dashboard |
 | **SinkSharp.HealthCheckSample** | Health check states, K8s probes, multi-check aggregation | `dotnet run` → https://localhost:5001/health/detail |
 | **SinkSharp.ScopedLoggingSample** | Correlation through 3 services, parallel tasks, nested scopes | `dotnet run` → https://localhost:5001/sinksharp/dashboard |
@@ -68,7 +68,7 @@ dotnet run
 - How `ISink.EmitAsync()` always runs on the drainer thread
 
 ### SinkSharp.CustomEnricherSample — Custom Enrichers
-- `TenantEnricher` — multi-tenant SaaS: AsyncLocal tenant context
+- `TenantEnricher` — multi-tenant SaaS: `ILogger.BeginScope()` captures TenantId on caller thread
 - `BuildInfoEnricher` — version/commit SHA stamped at startup (zero runtime cost)
 - `RequestEnricher` — ASP.NET: RequestPath, Method, UserId via `IHttpContextAccessor`
 - Nested scope override pattern
@@ -105,11 +105,11 @@ dotnet run
 ## Install
 
 ```bash
-dotnet add package SinkSharp.Core
-dotnet add package SinkSharp.Sinks.Console
-dotnet add package SinkSharp.Sinks.File
-dotnet add package SinkSharp.Sinks.Dashboard   # preview
-dotnet add package SinkSharp.Enrichers.Azure
+dotnet add package SinkSharp.Core                          # 1.0.2
+dotnet add package SinkSharp.Sinks.Console                  # 1.0.1
+dotnet add package SinkSharp.Sinks.File                     # 1.0.0
+dotnet add package SinkSharp.Sinks.Dashboard --prerelease    # 1.0.1-preview
+dotnet add package SinkSharp.Enrichers.Azure                # 1.0.0
 ```
 
 ---
@@ -118,5 +118,5 @@ dotnet add package SinkSharp.Enrichers.Azure
 
 - 🌐 [https://www.sinksharp.com](https://www.sinksharp.com)
 - 📦 [NuGet](https://www.nuget.org/packages/SinkSharp.Core)
-- 💻 [GitHub](https://github.com/SinkSharp/sinksharp)
+- 💻 [GitHub](https://github.com/SinkSharp/SinkSharp-Logging-Samples)
 - 📧 [support@sinksharp.com](mailto:support@sinksharp.com)

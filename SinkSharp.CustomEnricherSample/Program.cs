@@ -35,7 +35,7 @@ builder.Services.AddSinkSharp(options => options
     .WithEnricher(new TenantEnricher())       // adds TenantId from AsyncLocal
     .WithEnricher(new BuildInfoEnricher())    // adds AppVersion, BuildEnv, CommitSha
     .WithDashboard(out dashSink)
-    .WriteTo(new ColoredConsoleSink())
+    .WriteTo(new ColoredConsoleSink(showFullCategory: true, showSourceContext: true))
     .WriteTo(new RollingFileSink("logs", "enricher-sample")));
 
 builder.Services.AddSinkSharpDashboard(dashSink);
