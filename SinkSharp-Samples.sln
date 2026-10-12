@@ -1,8 +1,7 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
-
+# Visual Studio Version 18
+VisualStudioVersion = 18.10.12224.181 stable
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.Sample", "SinkSharp.Sample\SinkSharp.Sample.csproj", "{11111111-AAAA-AAAA-AAAA-111111111111}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.WebApiSample", "SinkSharp.WebApiSample\SinkSharp.WebApiSample.csproj", "{22222222-AAAA-AAAA-AAAA-222222222222}"
@@ -23,7 +22,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.HealthCheckSample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.ScopedLoggingSample", "SinkSharp.ScopedLoggingSample\SinkSharp.ScopedLoggingSample.csproj", "{AAAAAAAA-CCCC-CCCC-CCCC-AAAAAAAAAAAA}"
 EndProject
-
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.AspNetSample", "SinkSharp.AspNetSample\SinkSharp.AspNetSample.csproj", "{BBBBBBBB-CCCC-CCCC-CCCC-BBBBBBBBBBBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinkSharp.MultiPodSample", "SinkSharp.MultiPodSample\SinkSharp.MultiPodSample.csproj", "{CCCCCCCC-DDDD-DDDD-DDDD-CCCCCCCCCCCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,14 @@ Global
 		{AAAAAAAA-CCCC-CCCC-CCCC-AAAAAAAAAAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAAAAAAA-CCCC-CCCC-CCCC-AAAAAAAAAAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAAAAAAA-CCCC-CCCC-CCCC-AAAAAAAAAAAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBBBBBBB-CCCC-CCCC-CCCC-BBBBBBBBBBBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBBBBBBB-CCCC-CCCC-CCCC-BBBBBBBBBBBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBBBBBBB-CCCC-CCCC-CCCC-BBBBBBBBBBBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBBBBBBB-CCCC-CCCC-CCCC-BBBBBBBBBBBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCCCCCCC-DDDD-DDDD-DDDD-CCCCCCCCCCCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCCCCCCC-DDDD-DDDD-DDDD-CCCCCCCCCCCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCCCCCCC-DDDD-DDDD-DDDD-CCCCCCCCCCCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCCCCCCC-DDDD-DDDD-DDDD-CCCCCCCCCCCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -39,6 +39,13 @@ builder.Services.AddSinkSharp(options => options
     .WriteTo(new RollingFileSink("logs", "enricher-sample")));
 
 builder.Services.AddSinkSharpDashboard(dashSink);
+    // ── Multi-pod option — uncomment when running 2+ Kubernetes replicas ─────────
+    // Requires: dotnet add package Microsoft.AspNetCore.SignalR.StackExchangeRedis
+    // builder.Services.AddSinkSharpDashboardRedis(dashSink, signalR =>
+    //     signalR.AddStackExchangeRedis(
+    //         builder.Configuration["Redis:ConnectionString"]!,
+    //         options => options.Configuration.ChannelPrefix =
+    //             StackExchange.Redis.RedisChannel.Literal("MyApp.SinkSharp")));
 
 var app = builder.Build();
 

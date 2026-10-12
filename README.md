@@ -15,6 +15,7 @@ Complete working samples covering every use case. Each sample is self-contained 
 | **SinkSharp.MultiSinkSample** | Console + File + Dashboard + AuditFile simultaneously | `dotnet run` → https://localhost:5001/sinksharp/dashboard |
 | **SinkSharp.HealthCheckSample** | Health check states, K8s probes, multi-check aggregation | `dotnet run` → https://localhost:5001/health/detail |
 | **SinkSharp.ScopedLoggingSample** | Correlation through 3 services, parallel tasks, nested scopes | `dotnet run` → https://localhost:5001/sinksharp/dashboard |
+| **SinkSharp.MultiPodSample** | Both dashboard options — single pod + Redis multi-pod | `dotnet run` → https://localhost:{port}/sinksharp/dashboard |
 | **SinkSharp.AzureSample** | Azure enricher — App Service, AKS, Container Apps | `dotnet run` → https://localhost:5001 |
 
 ---
@@ -102,13 +103,69 @@ dotnet run
 
 ---
 
+
+## Dashboard registration — choose based on your deployment
+
+### Option 1 — Single pod / local dev / Docker single container
+
+```csharp
+// No extra packages needed
+builder.Services.AddSinkSharpDashboard(dashSink);
+```
+
+### Option 2 — Multi-pod / Kubernetes replicas / Azure App Service with scaling
+
+Without a backplane each pod has its own log buffer — you only see the logs from
+whichever pod the load balancer sends your browser to. A Redis backplane merges
+all pod streams into one dashboard.
+
+**You can reuse your existing Redis** — SinkSharp uses its own channel prefix
+(`SinkSharp`) and will never interfere with your session cache, distributed cache,
+or rate limiting.
+
+### How Redis backplane works
+
+```
+Pod A → SinkSharp → LogHub → Redis pub/sub ─┐
+                                             ├→ Browser (sees ALL pods)
+Pod B → SinkSharp → LogHub → Redis pub/sub ─┘
+```
+
+```bash
+# Extra package — only needed for multi-pod
+dotnet add package Microsoft.AspNetCore.SignalR.StackExchangeRedis
+```
+
+```csharp
+// Replace AddSinkSharpDashboard() with AddSinkSharpDashboardRedis()
+// Pass an Action<ISignalRServerBuilder> — call AddStackExchangeRedis() inside it
+builder.Services.AddSinkSharpDashboardRedis(dashSink, signalR =>
+    signalR.AddStackExchangeRedis(
+        Configuration["Redis:ConnectionString"],
+        options => options.Configuration.ChannelPrefix =
+            StackExchange.Redis.RedisChannel.Literal("MyApp.SinkSharp")));
+
+// UseSinkSharpDashboard() is unchanged
+app.UseSinkSharpDashboard("/sinksharp/dashboard");
+```
+
+### Comparison
+
+| | No Redis | With Redis backplane |
+|---|---|---|
+| 2+ pods, 1 dashboard | One pod's logs only | All pods merged ✅ |
+| Sticky sessions needed | Yes (ingress cookie) | No ✅ |
+| Existing Redis affected | — | Never ✅ |
+| Extra infrastructure | None | Reuse existing Redis |
+
+
 ## Install
 
 ```bash
 dotnet add package SinkSharp.Core                          # 1.0.2
 dotnet add package SinkSharp.Sinks.Console                  # 1.0.1
 dotnet add package SinkSharp.Sinks.File                     # 1.0.0
-dotnet add package SinkSharp.Sinks.Dashboard --prerelease    # 1.0.1-preview
+dotnet add package SinkSharp.Sinks.Dashboard --prerelease    # 1.0.4-preview
 dotnet add package SinkSharp.Enrichers.Azure                # 1.0.0
 ```
 

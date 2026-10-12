@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="SinkSharp.Core"           Version="1.0.2" />
+    <PackageReference Include="SinkSharp.Sinks.Console"  Version="1.0.1" />
+    <PackageReference Include="SinkSharp.Sinks.Dashboard" Version="1.0.4-preview" />
+    <!-- Uncomment for multi-pod Redis backplane (Option 2) -->
+    <!-- <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="9.0.0" /> -->
+  </ItemGroup>
+</Project>
